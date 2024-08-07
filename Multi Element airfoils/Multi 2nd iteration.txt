@@ -1,0 +1,17 @@
+1st element 
+
+c = 100 mm
+AoA = 8 deg
+LE = (0, 0)
+
+2nd element
+
+c = 50 mm
+AoA = 32 deg
+LE = (91, 15.5)
+
+3rd element
+
+c = 30 mm
+AoA = 67 deg
+LE = (131, 42.5)

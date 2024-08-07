@@ -1,0 +1,28 @@
+# encoding: utf-8
+# 2022 R1
+SetScriptVersion(Version="22.1.217")
+template1 = GetTemplate(TemplateName="Geometry")
+system1 = template1.CreateSystem()
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit()
+geometry1.Exit()
+geometry1.Edit()
+geometry1.Exit()
+template2 = GetTemplate(TemplateName="FLUENT")
+geometryComponent1 = system1.GetComponent(Name="Geometry")
+componentTemplate1 = GetComponentTemplate(Name="FluentSetupCellTemplate")
+system2 = template2.CreateSystem(
+    DataTransferFrom=[Set(FromComponent=geometryComponent1, TransferName=None, ToComponentTemplate=componentTemplate1)],
+    Position="Right",
+    RelativeTo=system1)
+system2.Delete()
+template3 = GetTemplate(TemplateName="Fluid Flow")
+system3 = template3.CreateSystem(
+    ComponentsToShare=[geometryComponent1],
+    Position="Right",
+    RelativeTo=system1)
+meshComponent1 = system3.GetComponent(Name="Mesh")
+meshComponent1.Refresh()
+mesh1 = system3.GetContainer(ComponentName="Mesh")
+mesh1.Edit()
+Save(Overwrite=True)
